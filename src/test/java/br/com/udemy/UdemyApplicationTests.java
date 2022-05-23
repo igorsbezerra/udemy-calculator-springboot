@@ -6,8 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class UdemyApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-
+    @Test
+    void main() {
+        UdemyApplication.main(new String[] {});
+    }
 }
