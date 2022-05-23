@@ -2,7 +2,6 @@ package br.com.udemy.exception.handler;
 
 import br.com.udemy.exception.ExceptionResponse;
 import br.com.udemy.exception.UnsuportedMathOperationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,12 +18,12 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ExceptionResponse> handleAllExceptions(Exception ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-        return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        return ResponseEntity.internalServerError().body(exceptionResponse);
     }
 
     @ExceptionHandler(UnsuportedMathOperationException.class)
     public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(UnsuportedMathOperationException ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest().body(exceptionResponse);
     }
 }
